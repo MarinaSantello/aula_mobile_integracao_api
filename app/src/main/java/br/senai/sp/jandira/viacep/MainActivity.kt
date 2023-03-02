@@ -68,7 +68,10 @@ fun Greeting() {
 
         Button(
             onClick = {
-                resultState = burcarCEP(cepState) //
+                burcarCEP(cepState) { result, x ->
+                    resultState = result
+                    var teste = x
+                }.toString() //
             }
         ) {
             Text(text = "Buscar")

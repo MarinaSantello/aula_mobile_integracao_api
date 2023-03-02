@@ -4,6 +4,7 @@ import br.senai.sp.jandira.viacep.model.Cep
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CepRetrofitService {
 
@@ -20,4 +21,10 @@ interface CepRetrofitService {
         @Path("cidade") cidade: String,
         @Path("logradouro") logradouro: String
     ): Call<List<Cep>> // retorno da função - chama uma lista com as classes do objeto de dados que precisamos
+
+    // End-point utilizado: https://viacep.com.br/ws/cidade?nome=jandira/json/ (fictício)
+    @GET("cidade?nome={nome_cidade}/json/")
+    fun getCidade(
+        @Query("nome_cidade") nomeCidade: String
+    )
 }

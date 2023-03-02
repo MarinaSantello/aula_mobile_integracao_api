@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-fun burcarCEP(cep: String): String {
+fun burcarCEP(cep: String, onComplete: (String, Int) -> Unit) {
 
     var logradouro = ""
 
@@ -19,7 +19,7 @@ fun burcarCEP(cep: String): String {
             response: Response<Cep>
         ) { // será executada quando a requisição tem sucesso e reponde
             logradouro = response.body()!!.logradouro ?: "Cep não encontrado"
-
+            onComplete.invoke(logradouro, 182) // envocacao do onComplete para passar o retorno da função (logradouro)
         }
 
         override fun onFailure(
@@ -29,6 +29,4 @@ fun burcarCEP(cep: String): String {
 
         }
     })
-
-    return logradouro
 }
